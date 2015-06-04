@@ -59,8 +59,13 @@
              * @param options 分享出去的参数（包括:title,desc,link,imgUrl）
              */
             var setAppMessage = function (options) {
-                $.extend(shareOption, options);
-                wx.onMenuShareAppMessage(shareOption);
+                options = angular.extend({
+                    imgUrl: shareOption.imgUrl,
+                    title: shareOption.title,
+                    desc: shareOption.desc,
+                    link: shareOption.link
+                }, options);
+                wx.onMenuShareAppMessage(options);
             };
 
             /**
@@ -68,13 +73,12 @@
              * @param options 分享出去的参数（包括:title,link,imgUrl）
              */
             var setTimeline = function (options) {
-                options = options || {};
-                $.extend(options, {
+                options = angular.extend({
                     title: shareOption.desc,
                     link: shareOption.link,
                     imgUrl: shareOption.imgUrl
-                });
-                wx.onMenuShareTimeline(shareOption);
+                }, options);
+                wx.onMenuShareTimeline(options);
             };
 
             /**
