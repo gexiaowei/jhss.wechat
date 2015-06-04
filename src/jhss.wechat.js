@@ -47,7 +47,7 @@
      * @param options 分享出去的参数（包括:title,desc,link,imgUrl）
      */
     var setAppMessage = function (options) {
-        options = $.extend({
+        options = extend({
             imgUrl: shareOption.imgUrl,
             title: shareOption.title,
             desc: shareOption.desc,
