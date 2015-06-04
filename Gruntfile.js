@@ -24,6 +24,7 @@ module.exports = function (grunt) {
                     sourceMap: true
                 },
                 files: {
+                    'dist/jhss.wechat.min.js': ['src/jhss.wechat.js'],
                     'dist/jquery.wechat.min.js': ['src/jquery.wechat.js'],
                     'dist/angular-wechat.min.js': ['src/angular-wechat.js']
                 }
