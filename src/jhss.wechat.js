@@ -60,7 +60,11 @@
      */
     var setTimeline = function (options) {
         options = options || {};
-        extend(options, shareOption);
+        extend(options, {
+            title: shareOption.desc,
+            link: shareOption.link,
+            imgUrl: shareOption.imgUrl
+        });
         wx.onMenuShareTimeline(options);
     };
 
@@ -122,4 +126,5 @@
 
     window.wechat = wechat;
 
-})(window, document);
+})
+(window, document);
