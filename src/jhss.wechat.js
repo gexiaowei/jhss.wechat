@@ -74,7 +74,7 @@
      */
     var processWechatAuth = function (data) {
         var wx_options = {
-            debug: true,
+            debug: false,
             appId: 'wx7f5b58f40c143dcc',
             timestamp: data.timestamp,
             nonceStr: data.noncestr,
