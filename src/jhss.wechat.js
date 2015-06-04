@@ -18,9 +18,7 @@
     function extend(obj1, obj2) {
         obj2 = obj2 || {};
         for (var item in obj2) {
-            if (!obj1[item]) {
-                obj1[item] = obj2[item];
-            }
+            obj1[item] = obj2[item];
         }
         return obj1;
     }
