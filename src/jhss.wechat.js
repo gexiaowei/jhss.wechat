@@ -32,7 +32,7 @@
     var register = function (options) {
         extend(shareOption, options);
         var xhr = new XMLHttpRequest();
-        xhr.open('get', 'http://119.253.36.116/asteroid/wx/signature?url=' + encodeURIComponent(window.location.href.replace(window.location.hash, '')), true);
+        xhr.open('get', 'http://asteroid.youguu.com/asteroid/wx/signature?url=' + encodeURIComponent(window.location.href.replace(window.location.hash, '')), true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
