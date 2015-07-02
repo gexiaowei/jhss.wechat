@@ -33,12 +33,13 @@
         };
 
         this.$get('$http', function ($http) {
-
+            var readyCallback;
             /**
              * 注册微信组件
              * @param options 分享参数
              */
-            var register = function (options) {
+            var register = function (options, callback) {
+                readyCallback = callback;
                 options = options || {};
                 angular.extend(options, shareOption);
                 $http({
@@ -111,6 +112,9 @@
             wx.ready(function () {
                 setAppMessage();
                 setTimeline();
+                if (readyCallback) {
+                    readyCallback();
+                }
             });
 
             return {

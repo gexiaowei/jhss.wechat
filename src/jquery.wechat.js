@@ -7,6 +7,8 @@
 (function ($, window, document) {
     'use strict';
 
+    var readyCallback;
+
     //默认设置
     var shareOption = {
         imgUrl: 'http://www.youguu.com/images/logo.gif',
@@ -19,7 +21,8 @@
      * 注册微信组件
      * @param options 分享参数
      */
-    var register = function (options) {
+    var register = function (options, callback) {
+        readyCallback = callback;
         $.extend(shareOption, options);
         $.ajax({
             url: 'http://asteroid.youguu.com/asteroid/wx/signature',
@@ -108,6 +111,9 @@
     wx.ready(function () {
         setAppMessage();
         setTimeline();
+        if (readyCallback) {
+            readyCallback();
+        }
     });
 
     $.wechat = {};
