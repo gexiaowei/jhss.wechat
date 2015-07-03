@@ -7,7 +7,7 @@
 (function (window, document) {
     'use strict';
     var module = angular.module('$wechat', []);
-    module.provider('$wechat', ['$http', function ($http) {
+    module.provider('$wechat', function () {
         //默认设置
         var shareOption = {
             imgUrl: 'http://www.youguu.com/images/logo.gif',
@@ -32,7 +32,7 @@
             wx.config(wx_options);
         };
 
-        this.$get = function () {
+        this.$get = ['$http', function ($http) {
             var readyCallback;
             /**
              * 注册微信组件
@@ -124,6 +124,6 @@
                 hideMenu: hideMenu,
                 getNetworkType: getNetworkType
             };
-        };
-    }]);
+        }];
+    });
 })(window, document);
