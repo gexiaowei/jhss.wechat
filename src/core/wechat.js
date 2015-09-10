@@ -110,17 +110,17 @@ Wechat.prototype._setTimeline = function (timeLine) {
  * 设置分享信息
  * @param shareMessage
  */
-Wechat.prototype.setShareMessage = function(shareMessage){
+Wechat.prototype.setShareMessage = function (shareMessage) {
     this.default.share.extendObject(shareMessage);
     this._setAppMessage({
         title: shareMessage.appTitle || shareMessage.title,
-        link: shareMessage.link,
-        imgUrl: shareMessage.imgUrl,
+        link: shareMessage.appLink || shareMessage.link,
+        imgUrl: shareMessage.appImgUrl || shareMessage.imgUrl,
         desc: shareMessage.desc
     });
     this._setTimeline({
         title: shareMessage.timelineTitle || shareMessage.title,
-        link: shareMessage.link,
-        imgUrl: shareMessage.imgUrl
+        link: shareMessage.timelineLink || shareMessage.link,
+        imgUrl: shareMessage.timelineImgUrl || shareMessage.imgUrl
     });
 };
