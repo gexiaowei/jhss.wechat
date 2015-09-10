@@ -32,6 +32,8 @@
         script.type = 'text/javascript';
         script.src = res;
         head.appendChild(script);
+    } else {
+        window.wechat.register();
     }
 })(window, document);
 
