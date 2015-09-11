@@ -61,7 +61,7 @@ function Wechat() {
         share: {
             title: document.title, // 分享标题
             link: window.location.href, // 分享链接
-            imgUrl: 'http://img.itc.cn/photo/jbkRk8qUehb', // 分享图标
+            imgUrl: (document.getElementsByName('shareLogo').length ? document.getElementsByName('shareLogo')[0].content : 'http://img.itc.cn/photo/jbkRk8qUehb'), // 分享图标
             desc: (document.getElementsByName('description').length ? document.getElementsByName('description')[0].content : '') // 分享描述(只有分享给朋友才存在)
         }
     }
