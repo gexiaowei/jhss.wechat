@@ -13,8 +13,8 @@
     var res = '//res.wx.qq.com/open/js/jweixin-1.0.0.js';
     var scripts = document.getElementsByTagName('script');
     var hasScript = false;
-    var script;
-    for (script in scripts) {
+    for (var i = 0; i < scripts.length; i++) {
+        var script = scripts[i];
         var scriptRes = script.getAttribute('src');
         if (scriptRes && scriptRes.indexOf(res) >= 0) {
             hasScript = true;
