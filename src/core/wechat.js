@@ -77,6 +77,7 @@ Wechat.prototype.register = function () {
         wx.config(config);
     });
     wx.ready(function () {
+        that.ready = true;
         that._setAppMessage();
         that._setTimeline();
     });
@@ -113,16 +114,20 @@ Wechat.prototype._setTimeline = function (timeLine) {
  * @param shareMessage
  */
 Wechat.prototype.setShareMessage = function (shareMessage) {
-    this.default.share.extendObject(shareMessage);
-    this._setAppMessage({
-        title: shareMessage.appTitle || shareMessage.title,
-        link: shareMessage.appLink || shareMessage.link,
-        imgUrl: shareMessage.appImgUrl || shareMessage.imgUrl,
-        desc: shareMessage.desc
-    });
-    this._setTimeline({
-        title: shareMessage.timelineTitle || shareMessage.title,
-        link: shareMessage.timelineLink || shareMessage.link,
-        imgUrl: shareMessage.timelineImgUrl || shareMessage.imgUrl
-    });
+    if(!this.ready){
+        this.default.share.extendObject(shareMessage);
+    }else{
+        this._setAppMessage({
+            title: shareMessage.appTitle || shareMessage.title,
+            link: shareMessage.appLink || shareMessage.link,
+            imgUrl: shareMessage.appImgUrl || shareMessage.imgUrl,
+            desc: shareMessage.desc
+        });
+        this._setTimeline({
+            title: shareMessage.timelineTitle || shareMessage.title,
+            link: shareMessage.timelineLink || shareMessage.link,
+            imgUrl: shareMessage.timelineImgUrl || shareMessage.imgUrl
+        });
+    }
+
 };
