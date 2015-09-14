@@ -1,6 +1,6 @@
 {
   "name": "jhss.wechat",
-  "version": "1.0.0",
+  "version": "0.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-jshint": "latest",
-    "grunt-contrib-clean": "latest"
+    "grunt-contrib-clean": "latest",
+    "grunt-ssh": "latest"
   }
 }

@@ -21,3 +21,10 @@ wechat函数绑定在window下，可以直接调用
     desc:'描述信息（默认：meta标签name为:description的content）',
  });
 ```
+
+### 历史版本
+
+#### 0.2.2
+> [http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js)
+
+> [http://m.youguu.com/mobile/jhss.wechat/0.2.2/angular-wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.2.2/angular-wechat.min.js)
