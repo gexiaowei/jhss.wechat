@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gexiaowei/jhss.wechat.git"
+  },
   "author": "gexiaowei <gandxiaowei@gmail.com>",
   "license": "MIT",
   "dependencies": {

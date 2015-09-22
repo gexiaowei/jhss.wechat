@@ -9,6 +9,10 @@
     "jhss",
     "wechat"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gexiaowei/jhss.wechat.git"
+  },
   "license": "MIT",
   "ignore": [
     "**/.*",
