@@ -42,15 +42,16 @@
  * @param another
  * @returns {Object}
  */
-Object.prototype.extendObject = function (another) {
+
+function extend(one, another) {
     another = another || {};
     for (var item in another) {
         if (!!another[item]) {
-            this[item] = another[item];
+            one[item] = another[item];
         }
     }
-    return this;
-};
+    return one;
+}
 
 /**
  * 暂时支持分享
@@ -91,7 +92,7 @@ Wechat.prototype.register = function () {
  */
 Wechat.prototype._setAppMessage = function (appMessage) {
     appMessage = appMessage || {};
-    appMessage.extendObject(this.default.share);
+    appMessage = extend(appMessage, this.default.share);
     wx.onMenuShareAppMessage(appMessage);
     return this;
 };
@@ -104,7 +105,7 @@ Wechat.prototype._setAppMessage = function (appMessage) {
  */
 Wechat.prototype._setTimeline = function (timeLine) {
     timeLine = timeLine || {};
-    timeLine.extendObject(this.default.share);
+    timeLine = extend(timeLine, this.default.share);
     wx.onMenuShareTimeline(timeLine);
     return this;
 };
@@ -114,9 +115,9 @@ Wechat.prototype._setTimeline = function (timeLine) {
  * @param shareMessage
  */
 Wechat.prototype.setShareMessage = function (shareMessage) {
-    if(!this.ready){
-        this.default.share.extendObject(shareMessage);
-    }else{
+    if (!this.ready) {
+        this.default.share = extend(this.default.share, shareMessage);
+    } else {
         this._setAppMessage({
             title: shareMessage.appTitle || shareMessage.title,
             link: shareMessage.appLink || shareMessage.link,
