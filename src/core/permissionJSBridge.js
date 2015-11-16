@@ -24,7 +24,7 @@
     };
 
     /**
-     * 设置
+     * 设置分享内容
      * @param shareMessage
      * @param platform
      */
@@ -47,6 +47,11 @@
         }
     };
 
+    /**
+     * 获取网页内权限
+     * @returns {Array}
+     * @private
+     */
     AppJSBridge.prototype._getPermissions = function () {
         return this._getMetaContent('jhss-permission').split(',');
     };
