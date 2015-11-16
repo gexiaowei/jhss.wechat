@@ -17,7 +17,6 @@
      * 设置权限
      */
     AppJSBridge.prototype.addPermissions = function () {
-        console.log(this._getMetaContent('jhss-permission'));
         if (window.jhssJSBridge) {
             window.jhssJSBridge.addPermissions(this._getMetaContent('jhss-permission'));
         }
@@ -29,7 +28,6 @@
      * @param platform
      */
     AppJSBridge.prototype.setShareMessage = function (shareMessage, platform) {
-        console.log(this._getPermissions().indexOf('share') >= 0);
         if (window.jhssJSBridge && this._getPermissions().indexOf('share') >= 0) {
             var platforms = ['WechatMoments', 'Wechat', 'QZone', 'QQ', 'SinaWeibo'],
                 shareKeys = ['title', 'description', 'shareLogo', 'link'];
@@ -45,7 +43,8 @@
                     });
                 }
                 message[tempPlatform] = platformShareMessage;
-            });
+            }.bind(this));
+            console.log(message);
             window.jhssJSBridge.setShareMessage(JSON.stringify(message));
         }
     };
@@ -66,10 +65,10 @@
      */
     AppJSBridge.prototype._getDefaultShareMessage = function (platform) {
         return {
-            title: this._getMetaContent('platform-title') || document.title || location.href,
-            description: this._getMetaContent('platform-description') || this._getMetaContent('description') || location.href,
-            shareLogo: this._getMetaContent('platform-shareLogo') || this._getMetaContent('description') || '',
-            link: this._getMetaContent('platform-link') || this._getMetaContent('link') || location.href
+            title: this._getMetaContent(platform + '-title') || document.title || location.href,
+            description: this._getMetaContent(platform + '-description') || this._getMetaContent('description') || location.href,
+            shareLogo: this._getMetaContent(platform + '-shareLogo') || this._getMetaContent('shareLogo') || '',
+            link: this._getMetaContent(platform + '-link') || this._getMetaContent('link') || location.href
         }
     };
 
