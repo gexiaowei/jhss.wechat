@@ -7,7 +7,8 @@
  */
 (function (window) {
     function AppJSBridge() {
-        document.onready = function () {
+        window.onload = function () {
+            console.log('设置app信息');
             this.addPermissions();
             this.setShareMessage();
         }.bind(this);
