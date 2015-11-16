@@ -9,7 +9,7 @@
     function AppJSBridge() {
         this.platforms = ['WechatMoments', 'Wechat', 'QZone', 'QQ', 'SinaWeibo'];
         document.onready = function () {
-            this.setPermissions();
+            this.addPermissions();
             this.setShareMessage();
         }
     }
@@ -17,9 +17,9 @@
     /**
      * 设置权限
      */
-    AppJSBridge.prototype.setPermissions = function () {
+    AppJSBridge.prototype.addPermissions = function () {
         if (jhssJSBridge) {
-            jhssJSBridge.setPermissions(this._getMetaContent('jhss-permission').split(','));
+            jhssJSBridge.addPermissions(this._getPermissions());
         }
     };
 
@@ -29,7 +29,7 @@
      * @param platform
      */
     AppJSBridge.prototype.setShareMessage = function (shareMessage, platform) {
-        if (jhssJSBridge) {
+        if (jhssJSBridge && this._getPermissions().indexOf('share') >= 0) {
             var shareKeys = ['title', 'description', 'shareLogo', 'link'];
             var message = {};
             this.platforms.map(function (tempPlatform) {
@@ -45,6 +45,10 @@
             });
             jhssJSBridge.setShareMessage(message);
         }
+    };
+
+    AppJSBridge.prototype._getPermissions = function () {
+        return this._getMetaContent('jhss-permission').split(',');
     };
 
     /**
