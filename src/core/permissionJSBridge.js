@@ -36,10 +36,10 @@
             var message = {};
             platforms.map(function (tempPlatform) {
                 var platformShareMessage = this._getDefaultShareMessage(tempPlatform);
-                if (platform === tempPlatform) {
+                if (!platform || platform === tempPlatform) {
                     shareKeys.map(function (key) {
                         if (shareMessage && shareMessage[key]) {
-                            platformShareMessage[key] = shareMessage[key];
+                            platformShareMessage[key] = (shareMessage[tempPlatform + '-' + key] || shareMessage[key]);
                         }
                     });
                 }

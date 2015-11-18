@@ -93,7 +93,12 @@ Wechat.prototype.register = function () {
 Wechat.prototype._setAppMessage = function (appMessage) {
     appMessage = appMessage || {};
     appMessage = extend(appMessage, this.default.share);
-    wx.onMenuShareAppMessage(appMessage);
+    wx.onMenuShareAppMessage({
+        title: appMessage.appTitle || appMessage.title,
+        link: appMessage.appLink || appMessage.link,
+        imgUrl: appMessage.appImgUrl || appMessage.imgUrl,
+        desc: appMessage.desc
+    });
     return this;
 };
 
@@ -106,7 +111,11 @@ Wechat.prototype._setAppMessage = function (appMessage) {
 Wechat.prototype._setTimeline = function (timeLine) {
     timeLine = timeLine || {};
     timeLine = extend(timeLine, this.default.share);
-    wx.onMenuShareTimeline(timeLine);
+    wx.onMenuShareTimeline({
+        title: timeLine.timelineTitle || timeLine.title,
+        link: timeLine.timelineLink || timeLine.link,
+        imgUrl: timeLine.timelineImgUrl || timeLine.imgUrl
+    });
     return this;
 };
 
