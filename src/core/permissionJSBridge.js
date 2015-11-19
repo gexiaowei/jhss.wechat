@@ -11,6 +11,7 @@
             console.log('设置app信息');
             this.addPermissions();
             this.setShareMessage();
+            this.invoke('ready');
         }.bind(this);
     }
 
@@ -38,7 +39,7 @@
                 var platformShareMessage = this._getDefaultShareMessage(tempPlatform);
                 if (!platform || platform === tempPlatform) {
                     shareKeys.map(function (key) {
-                        if (shareMessage && shareMessage[key]) {
+                        if (shareMessage && (shareMessage[tempPlatform + '-' + key] || shareMessage[key])) {
                             platformShareMessage[key] = (shareMessage[tempPlatform + '-' + key] || shareMessage[key]);
                         }
                     });
@@ -48,6 +49,22 @@
             console.log(message);
             window.jhssJSBridge.setShareMessage(JSON.stringify(message));
         }
+    };
+
+
+    AppJSBridge.prototype.invoke = function (eventName) {
+        if (this.events[eventName]) {
+            this.events[eventName].map(function (callback) {
+                callback();
+            });
+        }
+    };
+
+    AppJSBridge.prototype.on = function (eventName, callback) {
+        if (!this.events[eventName]) {
+            this.events[eventName] = [];
+        }
+        this.events[eventName].add(callback);
     };
 
     /**
@@ -83,6 +100,7 @@
         var meta = document.getElementsByName(name)[0];
         return meta ? (meta.getAttribute('content') || '') : '';
     };
+
 
     window.appJSBridge = new AppJSBridge();
 })(window);
