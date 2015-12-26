@@ -7,11 +7,11 @@
  */
 (function (window) {
     function AppJSBridge() {
+        this.ready = false;
         window.onload = function () {
-            console.log('设置app信息');
+            this.ready = true;
             this.addPermissions();
             this.setShareMessage();
-            this.invoke('ready');
         }.bind(this);
     }
 
@@ -30,9 +30,14 @@
      * @param platform
      */
     AppJSBridge.prototype.setShareMessage = function (shareMessage, platform) {
+        if (!this.ready) {
+            this.shareMessage = shareMessage;
+        }
         if (window.jhssJSBridge && this._getPermissions().indexOf('share') >= 0) {
             var platforms = ['WechatMoments', 'Wechat', 'QZone', 'QQ', 'SinaWeibo'],
                 shareKeys = ['title', 'description', 'shareLogo', 'link'];
+
+            shareMessage = shareMessage || this.shareMessage;
 
             var message = {};
             platforms.map(function (tempPlatform) {
@@ -46,26 +51,24 @@
                 }
                 message[tempPlatform] = platformShareMessage;
             }.bind(this));
-            console.log(message);
             window.jhssJSBridge.setShareMessage(JSON.stringify(message));
         }
     };
 
-
-    AppJSBridge.prototype.invoke = function (eventName) {
-        if (this.events[eventName]) {
-            this.events[eventName].map(function (callback) {
-                callback();
-            });
-        }
-    };
-
-    AppJSBridge.prototype.on = function (eventName, callback) {
-        if (!this.events[eventName]) {
-            this.events[eventName] = [];
-        }
-        this.events[eventName].add(callback);
-    };
+    //AppJSBridge.prototype.invoke = function (eventName) {
+    //    if (this.events[eventName]) {
+    //        this.events[eventName].map(function (callback) {
+    //            callback();
+    //        });
+    //    }
+    //};
+    //
+    //AppJSBridge.prototype.on = function (eventName, callback) {
+    //    if (!this.events[eventName]) {
+    //        this.events[eventName] = [];
+    //    }
+    //    this.events[eventName].add(callback);
+    //};
 
     /**
      * 获取网页内权限

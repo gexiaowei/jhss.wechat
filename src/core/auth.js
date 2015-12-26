@@ -33,7 +33,7 @@ Auth.prototype.done = function (done) {
                     timestamp: data.timestamp,
                     nonceStr: data.noncestr,
                     signature: data.signature,
-                    jsApiList: self.apiList
+                    jsApiList: self.apiList,
                 });
             }
         }

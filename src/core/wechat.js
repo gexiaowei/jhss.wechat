@@ -46,7 +46,7 @@
 function extend(one, another) {
     another = another || {};
     for (var item in another) {
-        if (!!another[item]) {
+        if (!!another[item] && !one[item]) {
             one[item] = another[item];
         }
     }
