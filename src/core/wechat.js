@@ -38,22 +38,6 @@
 })(window, document);
 
 /**
- * 扩展继承
- * @param another
- * @returns {Object}
- */
-
-function extend(one, another) {
-    another = another || {};
-    for (var item in another) {
-        if (!!another[item] && !one[item]) {
-            one[item] = another[item];
-        }
-    }
-    return one;
-}
-
-/**
  * 暂时支持分享
  * @constructor
  */
@@ -65,7 +49,8 @@ function Wechat() {
             imgUrl: (document.getElementsByName('shareLogo').length ? document.getElementsByName('shareLogo')[0].content : 'http://img.itc.cn/photo/jbkRk8qUehb'), // 分享图标
             desc: (document.getElementsByName('description').length ? document.getElementsByName('description')[0].content : '') // 分享描述(只有分享给朋友才存在)
         }
-    }
+    };
+    this.shareMessage = this.default.share;
 }
 
 /**
@@ -90,9 +75,8 @@ Wechat.prototype.register = function () {
  * @returns {Wechat}
  * @private
  */
-Wechat.prototype._setAppMessage = function (appMessage) {
-    appMessage = appMessage || {};
-    appMessage = extend(appMessage, this.default.share);
+Wechat.prototype._setAppMessage = function () {
+    var appMessage = this.shareMessage || {};
     wx.onMenuShareAppMessage({
         title: appMessage.appTitle || appMessage.title,
         link: appMessage.appLink || appMessage.link,
@@ -108,9 +92,8 @@ Wechat.prototype._setAppMessage = function (appMessage) {
  * @returns {Wechat}
  * @private
  */
-Wechat.prototype._setTimeline = function (timeLine) {
-    timeLine = timeLine || {};
-    timeLine = extend(timeLine, this.default.share);
+Wechat.prototype._setTimeline = function () {
+    var timeLine = this.shareMessage || {};
     wx.onMenuShareTimeline({
         title: timeLine.timelineTitle || timeLine.title,
         link: timeLine.timelineLink || timeLine.link,
@@ -124,20 +107,15 @@ Wechat.prototype._setTimeline = function (timeLine) {
  * @param shareMessage
  */
 Wechat.prototype.setShareMessage = function (shareMessage) {
-    if (!this.ready) {
-        this.default.share = extend(this.default.share, shareMessage);
-    } else {
-        this._setAppMessage({
-            title: shareMessage.appTitle || shareMessage.title,
-            link: shareMessage.appLink || shareMessage.link,
-            imgUrl: shareMessage.appImgUrl || shareMessage.imgUrl,
-            desc: shareMessage.desc
-        });
-        this._setTimeline({
-            title: shareMessage.timelineTitle || shareMessage.title,
-            link: shareMessage.timelineLink || shareMessage.link,
-            imgUrl: shareMessage.timelineImgUrl || shareMessage.imgUrl
-        });
+    for (var item in shareMessage) {
+        if (!!shareMessage[item]) {
+            this.shareMessage[item] = shareMessage[item];
+        }
+    }
+
+    if (this.ready) {
+        this._setAppMessage();
+        this._setTimeline();
     }
 
 };
