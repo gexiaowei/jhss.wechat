@@ -29,11 +29,11 @@ Auth.prototype.done = function (done) {
             var data = JSON.parse(xhr.responseText);
             if (data && data.status == '0000' && done) {
                 done({
-                    appId: self.appId,
+                    appId: data.appId || self.appId,
                     timestamp: data.timestamp,
                     nonceStr: data.noncestr,
                     signature: data.signature,
-                    jsApiList: self.apiList,
+                    jsApiList: self.apiList
                 });
             }
         }
