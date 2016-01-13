@@ -29,7 +29,7 @@ Auth.prototype.done = function (done) {
             var data = JSON.parse(xhr.responseText);
             if (data && data.status == '0000' && done) {
                 done({
-                    appId: data.appId || self.appId,
+                    appId: data.appid || self.appId,
                     timestamp: data.timestamp,
                     nonceStr: data.noncestr,
                     signature: data.signature,
