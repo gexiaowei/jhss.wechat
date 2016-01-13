@@ -11,7 +11,7 @@
  */
 function Auth() {
     this.authURL = 'http://asteroid.youguu.com/asteroid/wx/signature';
-    this.appId = 'wx7f5b58f40c143dcc';
+    this.appId = 'wx5380d5f91ec523cc';
     this.apiList = ['onMenuShareTimeline', 'onMenuShareAppMessage'];
 }
 
