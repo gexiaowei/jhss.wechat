@@ -94,7 +94,7 @@
      * @param menuId
      * @param option
      */
-    AppJSBridge.prototype.invokeEvent = function (menuId, option) {
+    AppJSBridge.prototype.invokeMenuEvent = function (menuId, option) {
         var callback = this.events[menuId];
         if (callback) {
             callback(option);
