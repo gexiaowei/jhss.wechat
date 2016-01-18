@@ -57,28 +57,21 @@
     };
 
     /**
-     * 在App上增加一个菜单
-     * @param option
-     * @param callback
-     * @returns {number}
+     * 在App上增加菜单
+     * @param options
+     * @returns {{}}
      */
-    AppJSBridge.prototype.addMenu = function (option) {
-        var menuId = 0;
-        if (window.jhssJSBridge) {
-            menuId = Date.now();
-            window.jhssJSBridge.addMenuItem(JSON.stringify({
-                eventId: eventId,
-                text: option.text,
-                icon: option.icon
-            }));
-            this.events[menuId] = option.callback;
+    AppJSBridge.prototype.addMenus = function (options) {
+        var menus = {};
+        if (window.jhssJSBridge && options) {
+            options.map(function (option) {
+                var menuId = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+                option.eventId = menuId;
+                menus[menuId] = option;
+            });
+            window.jhssJSBridge.addMenuItems(JSON.stringify(options));
         }
-        return menuId;
-    };
-
-
-    AppJSBridge.prototype.addMenus = function (menus) {
-        this.addMenu(menus);
+        return menus;
     };
 
     /**
@@ -141,7 +134,6 @@
         var meta = document.getElementsByName(name)[0];
         return meta ? (meta.getAttribute('content') || '') : '';
     };
-
 
     window.appJSBridge = new AppJSBridge();
 })(window);
