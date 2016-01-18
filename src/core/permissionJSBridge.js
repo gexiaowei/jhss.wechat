@@ -8,6 +8,7 @@
 (function (window) {
     function AppJSBridge() {
         this.ready = false;
+        this.events = {};
         window.onload = function () {
             this.ready = true;
             this.addPermissions();
@@ -55,13 +56,50 @@
         }
     };
 
-    //AppJSBridge.prototype.invoke = function (eventName) {
-    //    if (this.events[eventName]) {
-    //        this.events[eventName].map(function (callback) {
-    //            callback();
-    //        });
-    //    }
-    //};
+    /**
+     * 在App上增加一个菜单
+     * @param option
+     * @param callback
+     * @returns {number}
+     */
+    AppJSBridge.prototype.addMenu = function (option) {
+        var menuId = 0;
+        if (window.jhssJSBridge) {
+            menuId = Date.now();
+            window.jhssJSBridge.addMenuItem(JSON.stringify({
+                eventId: eventId,
+                text: option.text,
+                icon: option.icon
+            }));
+            this.events[menuId] = option.callback;
+        }
+        return menuId;
+    };
+
+
+    AppJSBridge.prototype.addMenus = function (menus) {
+        this.addMenu(menus);
+    };
+
+    /**
+     * 在App上移除一个菜单
+     * @param menuId
+     */
+    AppJSBridge.prototype.removeMenu = function (menuId) {
+        delete this.events[menuId];
+    };
+
+    /**
+     * 触发回调事件
+     * @param menuId
+     * @param option
+     */
+    AppJSBridge.prototype.invokeEvent = function (menuId, option) {
+        var callback = this.events[menuId];
+        if (callback) {
+            callback(option);
+        }
+    };
     //
     //AppJSBridge.prototype.on = function (eventName, callback) {
     //    if (!this.events[eventName]) {
