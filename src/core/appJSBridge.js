@@ -8,6 +8,7 @@
 (function (window) {
     function AppJSBridge() {
         this.ready = false;
+        this.events = {};
         window.onload = function () {
             this.ready = true;
             this.addPermissions();
@@ -55,13 +56,46 @@
         }
     };
 
-    //AppJSBridge.prototype.invoke = function (eventName) {
-    //    if (this.events[eventName]) {
-    //        this.events[eventName].map(function (callback) {
-    //            callback();
-    //        });
-    //    }
-    //};
+    /**
+     * 在App上增加菜单
+     * @param options
+     * @returns {{}}
+     */
+    AppJSBridge.prototype.addMenus = function (options) {
+        var menus = {};
+        if (window.jhssJSBridge && options) {
+            options.map(function (option) {
+                var menuId = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+                option.eventId = menuId;
+                console.log(option);
+                console.log(option.success);
+                this.events[menuId] = option.success;
+                menus[menuId] = option;
+            }.bind(this));
+            window.jhssJSBridge.addMenuItems(JSON.stringify(options));
+        }
+        return menus;
+    };
+
+    /**
+     * 在App上移除一个菜单
+     * @param menuId
+     */
+    AppJSBridge.prototype.removeMenu = function (menuId) {
+        delete this.events[menuId];
+    };
+
+    /**
+     * 触发回调事件
+     * @param menuId
+     * @param option
+     */
+    AppJSBridge.prototype.invokeMenuEvent = function (menuId, option) {
+        var callback = this.events[menuId];
+        if (callback) {
+            callback(option);
+        }
+    };
     //
     //AppJSBridge.prototype.on = function (eventName, callback) {
     //    if (!this.events[eventName]) {
@@ -103,7 +137,6 @@
         var meta = document.getElementsByName(name)[0];
         return meta ? (meta.getAttribute('content') || '') : '';
     };
-
 
     window.appJSBridge = new AppJSBridge();
 })(window);

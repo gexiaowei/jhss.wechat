@@ -11,7 +11,7 @@
  */
 function Auth() {
     this.authURL = 'http://asteroid.youguu.com/asteroid/wx/signature';
-    this.appId = 'wx7f5b58f40c143dcc';
+    this.appId = 'wx5380d5f91ec523cc';
     this.apiList = ['onMenuShareTimeline', 'onMenuShareAppMessage'];
 }
 
@@ -29,11 +29,11 @@ Auth.prototype.done = function (done) {
             var data = JSON.parse(xhr.responseText);
             if (data && data.status == '0000' && done) {
                 done({
-                    appId: self.appId,
+                    appId: data.appid || self.appId,
                     timestamp: data.timestamp,
                     nonceStr: data.noncestr,
                     signature: data.signature,
-                    jsApiList: self.apiList,
+                    jsApiList: self.apiList
                 });
             }
         }

@@ -1,6 +1,6 @@
 {
   "name": "jhss.wechat",
-  "version": "0.2.2dev",
+  "version": "0.3.2",
   "description": "",
   "main": "index.js",
   "scripts": {
