@@ -67,8 +67,11 @@
             options.map(function (option) {
                 var menuId = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
                 option.eventId = menuId;
+                console.log(option);
+                console.log(option.success);
+                this.events[menuId] = option.success;
                 menus[menuId] = option;
-            });
+            }.bind(this));
             window.jhssJSBridge.addMenuItems(JSON.stringify(options));
         }
         return menus;
