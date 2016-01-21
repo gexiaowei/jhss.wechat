@@ -38,19 +38,19 @@ Native内部JS桥
 设置右上角的菜单 menu为一个数组
 > Example:
 ```
-    addMenus([{
-        text:'菜单名称',
-        success:function(){
-            alert('触发回调')
-        }
-    }])
+addMenus([{
+    text:'菜单名称',
+    success:function(){
+        alert('触发回调')
+    }
+}])
 ```
 
 ### 历史版本
 
 #### 0.3.2
-> [http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/jhss.wechat.min.js)
-> [http://m.youguu.com/mobile/jhss.wechat/0.2.2/angular-wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/angular-wechat.min.js)
+> [http://m.youguu.com/mobile/jhss.wechat/0.3.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/jhss.wechat.min.js)
+> [http://m.youguu.com/mobile/jhss.wechat/0.3.2/angular-wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/angular-wechat.min.js)
 
 #### 0.2.2
 > [http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js)
