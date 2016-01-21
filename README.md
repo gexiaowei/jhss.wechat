@@ -22,9 +22,36 @@ wechat函数绑定在window下，可以直接调用
  });
 ```
 
+# appJSBridge
+------
+
+Native内部JS桥
+
+### addPermissions()
+
+增加权限 不需要调用,在name为jhss-permission的meta中配置就可以了,暂时只支持share
+
+### setShareMessage(message)
+设置分享信息 可以设置WechatMoments, Wechat, QZone, QQ, SinaWeibo5个平台的信息,可以分开设置 也可以在meta中配置
+
+### addMenus(menus)
+设置右上角的菜单 menu为一个数组
+> Example:
+```
+    addMenus([{
+        text:'菜单名称',
+        success:function(){
+            alert('触发回调')
+        }
+    }])
+```
+
 ### 历史版本
+
+#### 0.3.2
+> [http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/jhss.wechat.min.js)
+> [http://m.youguu.com/mobile/jhss.wechat/0.2.2/angular-wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/angular-wechat.min.js)
 
 #### 0.2.2
 > [http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.2.2/jhss.wechat.min.js)
-
 > [http://m.youguu.com/mobile/jhss.wechat/0.2.2/angular-wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.2.2/angular-wechat.min.js)
