@@ -27,6 +27,10 @@ wechat函数绑定在window下，可以直接调用
 
 Native内部JS桥
 
+### register(option)
+
+手动去注册appJSBridge,自动调用addPermissions和setShareMessage
+
 ### addPermissions()
 
 增加权限 不需要调用,在name为jhss-permission的meta中配置就可以了,暂时只支持share
@@ -47,6 +51,10 @@ addMenus([{
 ```
 
 ### 历史版本
+
+#### 0.3.3
+> [http://m.youguu.com/mobile/jhss.wechat/0.3.3/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.3/jhss.wechat.min.js)
+> [http://m.youguu.com/mobile/jhss.wechat/0.3.3/angular-wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.3/angular-wechat.min.js)
 
 #### 0.3.2
 > [http://m.youguu.com/mobile/jhss.wechat/0.3.2/jhss.wechat.min.js](http://m.youguu.com/mobile/jhss.wechat/0.3.2/jhss.wechat.min.js)

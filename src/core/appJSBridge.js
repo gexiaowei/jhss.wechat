@@ -9,12 +9,13 @@
     function AppJSBridge() {
         this.ready = false;
         this.events = {};
-        window.onload = function () {
-            this.ready = true;
-            this.addPermissions();
-            this.setShareMessage();
-        }.bind(this);
     }
+
+    AppJSBridge.prototype.register = function (option) {
+        this.shareMessage = option.shareMessage;
+        this.addPermissions();
+        this.setShareMessage();
+    };
 
     /**
      * 设置权限
@@ -31,9 +32,6 @@
      * @param platform
      */
     AppJSBridge.prototype.setShareMessage = function (shareMessage, platform) {
-        if (!this.ready) {
-            this.shareMessage = shareMessage;
-        }
         if (window.jhssJSBridge && this._getPermissions().indexOf('share') >= 0) {
             var platforms = ['WechatMoments', 'Wechat', 'QZone', 'QQ', 'SinaWeibo'],
                 shareKeys = ['title', 'description', 'shareLogo', 'link'];
