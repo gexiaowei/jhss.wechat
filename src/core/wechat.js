@@ -23,7 +23,7 @@
     }
 
     window.wechat = new Wechat();
-    if (!hasScript) {
+    if (window.wechat.isIn() && !hasScript) {
         var head = document.getElementsByTagName('head')[0];
         script = document.createElement('script');
         script.onload = function () {
@@ -67,6 +67,11 @@ Wechat.prototype.register = function () {
         that._setAppMessage();
         that._setTimeline();
     });
+    return this;
+};
+
+Wechat.prototype.isIn = function () {
+    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === "micromessenger";
 };
 
 /**
@@ -76,13 +81,15 @@ Wechat.prototype.register = function () {
  * @private
  */
 Wechat.prototype._setAppMessage = function () {
-    var appMessage = this.shareMessage || {};
-    wx.onMenuShareAppMessage({
-        title: appMessage.appTitle || appMessage.title,
-        link: appMessage.appLink || appMessage.link,
-        imgUrl: appMessage.appImgUrl || appMessage.imgUrl,
-        desc: appMessage.desc
-    });
+    if (this.isIn()) {
+        var appMessage = this.shareMessage || {};
+        wx.onMenuShareAppMessage({
+            title: appMessage.appTitle || appMessage.title,
+            link: appMessage.appLink || appMessage.link,
+            imgUrl: appMessage.appImgUrl || appMessage.imgUrl,
+            desc: appMessage.desc
+        });
+    }
     return this;
 };
 
@@ -93,12 +100,14 @@ Wechat.prototype._setAppMessage = function () {
  * @private
  */
 Wechat.prototype._setTimeline = function () {
-    var timeLine = this.shareMessage || {};
-    wx.onMenuShareTimeline({
-        title: timeLine.timelineTitle || timeLine.title,
-        link: timeLine.timelineLink || timeLine.link,
-        imgUrl: timeLine.timelineImgUrl || timeLine.imgUrl
-    });
+    if (this.isIn()) {
+        var timeLine = this.shareMessage || {};
+        wx.onMenuShareTimeline({
+            title: timeLine.timelineTitle || timeLine.title,
+            link: timeLine.timelineLink || timeLine.link,
+            imgUrl: timeLine.timelineImgUrl || timeLine.imgUrl
+        });
+    }
     return this;
 };
 
@@ -112,10 +121,8 @@ Wechat.prototype.setShareMessage = function (shareMessage) {
             this.shareMessage[item] = shareMessage[item];
         }
     }
-
     if (this.ready) {
-        this._setAppMessage();
-        this._setTimeline();
+        this._setAppMessage()._setTimeline();
     }
-
+    return this;
 };
