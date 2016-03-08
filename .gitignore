@@ -5,3 +5,4 @@ bower_components
 node_modules
 GruntfilePublish.js
 secret.json
+**/.DS_Store
