@@ -44,7 +44,7 @@
             });
             wx.ready(function () {
                 that.ready = true;
-                wechat.getNetworkType = wx.getNetworkType;
+                that.getNetworkType = wx.getNetworkType;
                 that._setAppMessage();
                 that._setTimeline();
                 if (that.readyCallback) {
