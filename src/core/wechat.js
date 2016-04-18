@@ -15,6 +15,7 @@
      * @constructor
      */
     function Wechat() {
+        this.debug = false;
         this.default = {
             share: {
                 title: document.title, // 分享标题
@@ -30,9 +31,15 @@
      * 根据授权配置微信
      */
     Wechat.prototype.register = function () {
-        if (typeof wx !== 'undefined' && !!window.wechatAuth) {
+        if (typeof wx !== 'undefined' && !!window.capvision.wechatAuth) {
+            if (this.debug) {
+                console.log('开始加载数据');
+            }
             var that = this;
-            window.wechatAuth.done(function (config) {
+            window.capvision.wechatAuth.done(function (config) {
+                if (this.debug) {
+                    console.log('开始配置微信权限', config);
+                }
                 wx.config(config);
             });
             wx.ready(function () {
@@ -96,6 +103,9 @@
             }
         }
         if (this.ready) {
+            if (this.debug) {
+                console.log('设置分享内容', this.shareMessage);
+            }
             this._setAppMessage()._setTimeline();
         }
         return this;
