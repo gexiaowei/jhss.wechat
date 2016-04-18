@@ -24,9 +24,8 @@ module.exports = function (grunt) {
                     sourceMap: true
                 },
                 files: {
-                    'dist/local-debug.min.js': ['src/local-debug.js'],
-                    'dist/jhss.wechat.min.js': ['src/core/auth.js', 'src/core/wechat.js', 'src/core/appJSBridge.js'],
-                    'dist/angular-wechat.min.js': ['src/core/auth.js', 'src/core/wechat.js', 'src/core/appJSBridge.js', 'src/angular-wechat.js']
+                    'dist/jhss.wechat.min.js': ['src/http/jsonp.js', 'src/core/auth.js', 'src/core/wechat.js'],
+                    'dist/angular-wechat.min.js': ['src/http/jsonp.js', 'src/core/auth.js', 'src/core/wechat.js', 'src/angular-wechat.js']
                 }
             }
         }

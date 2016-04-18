@@ -9,7 +9,7 @@
     var module = angular.module('$wechat', []);
     module.provider('$wechat', function () {
         this.$get = [function () {
-            return window.wechat;
+            return window.capvision.wechat;
         }];
     });
 })(angular, window);
