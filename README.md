@@ -2,7 +2,7 @@
 
 ------
 
-该插件**只能用于http://capvision.cn及其子域名下**
+该插件**只能用于capvision.cn及其子域名下**
 
 别的地方调用需修改src/core/下的auth.js的授权过程，重新用grunt构建
 
