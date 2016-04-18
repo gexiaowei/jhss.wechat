@@ -44,8 +44,12 @@
             });
             wx.ready(function () {
                 that.ready = true;
+                wechat.getNetworkType = wx.getNetworkType;
                 that._setAppMessage();
                 that._setTimeline();
+                if (that.readyCallback) {
+                    that.readyCallback();
+                }
             });
         }
         return this;
@@ -53,6 +57,13 @@
 
     Wechat.prototype.isIn = function () {
         return navigator.userAgent.toLowerCase().indexOf("micromessenger") >= 0;
+    };
+
+    Wechat.prototype.setReadyCallback = function (callback) {
+        this.readyCallback = callback;
+        if (this.ready) {
+            callback();
+        }
     };
 
     /**

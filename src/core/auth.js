@@ -13,7 +13,7 @@
     function Auth() {
         this.authURL = 'http://wx.capvision.cn/';
         this.appId = 'wx39670c44d62fb9d3';
-        this.apiList = ['onMenuShareTimeline', 'onMenuShareAppMessage'];
+        this.apiList = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'getNetworkType'];
     }
 
     /**
