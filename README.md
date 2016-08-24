@@ -1,5 +1,7 @@
 # jhss.wechat
 
+![img](https://travis-ci.org/gexiaowei/jhss.wechat.svg)
+
 ------
 
 该插件**只能用于http://www.youguu.com及其子域名下**
