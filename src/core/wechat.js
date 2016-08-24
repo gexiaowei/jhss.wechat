@@ -71,7 +71,7 @@ Wechat.prototype.register = function () {
 };
 
 Wechat.prototype.isIn = function () {
-    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === "micromessenger";
+    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i)[0] === "micromessenger";
 };
 
 /**
